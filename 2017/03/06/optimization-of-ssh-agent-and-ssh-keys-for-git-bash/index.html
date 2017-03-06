@@ -5,20 +5,21 @@
   
   <title>optimization-of-ssh-agent-and-ssh-keys-for-git-bash | Time Gap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Several days ago, i firstly installed git in my new laptop, and encountered a problem about management of ssh-agent and ssh keys.
-After started a new “git bash” terminal, there was something wrong whe">
+  <meta name="description" content="Several days ago, To use github, i installed git in my new laptop for the first time, and encountered a problem about management of ssh-agent and ssh keys.
+After started a new “git bash” terminal, the">
 <meta property="og:type" content="article">
 <meta property="og:title" content="optimization-of-ssh-agent-and-ssh-keys-for-git-bash">
 <meta property="og:url" content="http://vingc.github.io/2017/03/06/optimization-of-ssh-agent-and-ssh-keys-for-git-bash/index.html">
 <meta property="og:site_name" content="Time Gap">
-<meta property="og:description" content="Several days ago, i firstly installed git in my new laptop, and encountered a problem about management of ssh-agent and ssh keys.
-After started a new “git bash” terminal, there was something wrong whe">
+<meta property="og:description" content="Several days ago, To use github, i installed git in my new laptop for the first time, and encountered a problem about management of ssh-agent and ssh keys.
+After started a new “git bash” terminal, the">
 <meta property="og:image" content="http://vingc.github.io/../images/ssh_error.png">
-<meta property="og:updated_time" content="2017-03-05T16:20:56.471Z">
+<meta property="og:image" content="http://vingc.github.io/../images/dup_ssh_processes.png">
+<meta property="og:updated_time" content="2017-03-06T06:02:54.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="optimization-of-ssh-agent-and-ssh-keys-for-git-bash">
-<meta name="twitter:description" content="Several days ago, i firstly installed git in my new laptop, and encountered a problem about management of ssh-agent and ssh keys.
-After started a new “git bash” terminal, there was something wrong whe">
+<meta name="twitter:description" content="Several days ago, To use github, i installed git in my new laptop for the first time, and encountered a problem about management of ssh-agent and ssh keys.
+After started a new “git bash” terminal, the">
 <meta name="twitter:image" content="http://vingc.github.io/../images/ssh_error.png">
   
     <link rel="alternate" href="/atom.xml" title="Time Gap" type="application/atom+xml">
@@ -98,17 +99,37 @@ After started a new “git bash” terminal, there was something wrong whe">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Several days ago, i firstly installed git in my new laptop, and encountered a problem about management of ssh-agent and ssh keys.</p>
+        <p>Several days ago, To use github, i installed git in my new laptop for the first time, and encountered a problem about management of ssh-agent and ssh keys.</p>
 <p>After started a new “git bash” terminal, there was something wrong when pushed my new commit, see below picture:</p>
 <p><img src="../images/ssh_error.png" alt="error"></p>
 <p>when used command “ssh-add -l” to check the private keys added, it returned an error.</p>
-<p>After google, realized that “git bash” needs we start the “ssh-agent” process before “ssh-add” and “git” command to use ssh channel.</p>
-<p>Lay why “git bash” doesn’t launch “ssh-agent” when the terminal launched.</p>
+<p>After google, realized that “git bash” needs us start the “ssh-agent” process before “ssh-add” and “git” command to use ssh channel. </p>
+<p><a href="http://stackoverflow.com/questions/17846529/could-not-open-a-connection-to-your-authentication-agent/10077302#10077302" target="_blank" rel="external">resolution</a></p>
+<p>Sure, we can fix it manually, but why “git bash” doesn’t start “ssh-agent” itself when the terminal launched？as we all know we need it.</p>
+<p>Now, lay the question aside firstly, i wanted to let git work elegantly.</p>
+<p>Do we execute commands “eval <code>ssh-agent -s</code>“ and “ssh-add ~/.ssh/github_rsa” every time when launch a “git bash” terminal?</p>
+<p> No, of course not, i can’t bear this trouble, as a engineer who develops software to make life easier.</p>
+<p>we can follow the “good” <a href="http://anterence.blogspot.com/2012/01/ssh-agent-in-msysgit.html" target="_blank" rel="external">tutorial</a> to let “git bash” start “ssh-agent” itself by append the commands to the file “$installed_directory/etc/bash.bashrc“.</p>
+<p>Have we done?</p>
+<p>Ha, haven’t, it’s a good resolution, but not the best.</p>
+<p>I tested the resolution by opening several “git bash” terminals at the same time, see the picture:</p>
+<p><img src="../images/dup_ssh_processes.png" alt="multiple processes"></p>
+<p>There would be multiple processes if we opened several “git bash” terminals, each process per time.</p>
+<p>This was not elegant. I couldn’t bear this resolution too. I wanted to optimize it.</p>
+<p>New resolution:  check whether the ssh-agent has been started, dependent the result to execute commands or not.</p>
+<p>here is the code:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#start ssh-agent and add keys</div><div class="line">SERVICE=&apos;ssh-agent&apos;</div><div class="line"></div><div class="line">if ps -ef|grep -u $SERVICE &gt;/dev/null   #check whether the process started by current user exists </div><div class="line">then</div><div class="line">   echo $SERVICE running.</div><div class="line">else</div><div class="line">   echo $SERVICE not running.</div><div class="line">   ssh-agent &gt; ~/.ssh/agent_env  #start the process,and dump the environment variables</div><div class="line">   ssh-add ~/.ssh/github_rsa     #just for once</div><div class="line">fi</div><div class="line">. ~/.ssh/agent_env   #export the environment variables</div></pre></td></tr></table></figure>
+<p>Things were finished, although still had questions here.</p>
+<ul>
+<li>why do we need to add key each time when “git bash” launched? </li>
+<li>where is it stored? Don’t need to add it each time if keep it stored durably. </li>
+</ul>
+<p>Less procedure, launch faster. I will figure out.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vingc.github.io/2017/03/06/optimization-of-ssh-agent-and-ssh-keys-for-git-bash/" data-id="cizwy2c6y0001bcjf5kbhlfmm" class="article-share-link">Share</a>
+      <a data-url="http://vingc.github.io/2017/03/06/optimization-of-ssh-agent-and-ssh-keys-for-git-bash/" data-id="cizxpxieg0000igjfzlo7uv3m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git-bash-ssh/">git bash ssh</a></li></ul>
@@ -117,16 +138,6 @@ After started a new “git bash” terminal, there was something wrong whe">
   </div>
   
     
-<nav id="article-nav">
-  
-  
-    <a href="/2017/03/05/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
-
   
 </article>
 
@@ -181,10 +192,6 @@ After started a new “git bash” terminal, there was something wrong whe">
         
           <li>
             <a href="/2017/03/06/optimization-of-ssh-agent-and-ssh-keys-for-git-bash/">optimization-of-ssh-agent-and-ssh-keys-for-git-bash</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/05/hello-world/">Hello World</a>
           </li>
         
       </ul>
