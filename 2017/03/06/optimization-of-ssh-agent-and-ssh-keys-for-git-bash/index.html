@@ -6,20 +6,20 @@
   <title>optimization-of-ssh-agent-and-ssh-keys-for-git-bash | Time Gap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="BackgroundSeveral days ago, To use github, i installed git in my new laptop for the first time, and encountered a problem about management of ssh-agent and ssh keys.
-After starting a new “git bash” te">
+After starting a new “git bash” t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="optimization-of-ssh-agent-and-ssh-keys-for-git-bash">
 <meta property="og:url" content="http://vingc.github.io/2017/03/06/optimization-of-ssh-agent-and-ssh-keys-for-git-bash/index.html">
 <meta property="og:site_name" content="Time Gap">
 <meta property="og:description" content="BackgroundSeveral days ago, To use github, i installed git in my new laptop for the first time, and encountered a problem about management of ssh-agent and ssh keys.
-After starting a new “git bash” te">
+After starting a new “git bash” t">
 <meta property="og:image" content="http://vingc.github.io/../images/ssh_error.png">
 <meta property="og:image" content="http://vingc.github.io/../images/dup_ssh_processes.png">
-<meta property="og:updated_time" content="2017-03-06T08:20:33.555Z">
+<meta property="og:updated_time" content="2017-03-06T08:27:22.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="optimization-of-ssh-agent-and-ssh-keys-for-git-bash">
 <meta name="twitter:description" content="BackgroundSeveral days ago, To use github, i installed git in my new laptop for the first time, and encountered a problem about management of ssh-agent and ssh keys.
-After starting a new “git bash” te">
+After starting a new “git bash” t">
 <meta name="twitter:image" content="http://vingc.github.io/../images/ssh_error.png">
   
     <link rel="alternate" href="/atom.xml" title="Time Gap" type="application/atom+xml">
@@ -99,7 +99,8 @@ After starting a new “git bash” te">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h4><p>Several days ago, To use github, i installed git in my new laptop for the first time, and encountered a problem about management of ssh-agent and ssh keys.</p>
+        <hr>
+<h4 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h4><p>Several days ago, To use github, i installed git in my new laptop for the first time, and encountered a problem about management of ssh-agent and ssh keys.</p>
 <p>After starting a new “git bash” terminal, there was something wrong when pushed my new commit, see below picture:</p>
 <p><img src="../images/ssh_error.png" alt="error"></p>
 <p>when used command “ssh-add -l” to check the private keys added, it returned an error, the key error message “Could not open a connection to your authentication agent” .</p>
@@ -126,11 +127,12 @@ After starting a new “git bash” te">
 <li>where is it stored? Don’t need to add it every time if keep it stored durably. </li>
 </ul>
 <p>Less procedure, launch faster. I will figure out.</p>
-<h4 id="——2017-03-06——"><a href="#——2017-03-06——" class="headerlink" title="——2017-03-06——"></a>——2017-03-06——</h4><continue>
-
+<h4 id="——2017-03-06——"><a href="#——2017-03-06——" class="headerlink" title="——2017-03-06——"></a>——2017-03-06——</h4><p>continue…</p>
 <p>I think the private key identities is stored in memory of ssh-agent process space, so when stop the process, the data would be lost, and don’t need further tuning after trading off.</p>
-<h4 id="appendix"><a href="#appendix" class="headerlink" title="appendix"></a>appendix</h4><p><a href="https://www.freebsd.org/cgi/man.cgi?query=ssh-add&amp;sektion=1" target="_blank" rel="external">More information about ssh-add</a></p>
-</continue>
+<h4 id="appendix"><a href="#appendix" class="headerlink" title="appendix"></a>appendix</h4><ul>
+<li><a href="https://www.freebsd.org/cgi/man.cgi?query=ssh-add&amp;sektion=1" target="_blank" rel="external">More information about ssh-add</a></li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
