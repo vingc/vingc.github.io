@@ -53,6 +53,7 @@ How?
 * Automation system
 * Workflow standardization
 * Design principles
+* container
 * Others
 
 
@@ -73,6 +74,13 @@ I don't talk about my thought of the backup mechanism, just list others':
 
 * [GITLAB issue](https://gitlab.com/gitlab-com/infrastructure/issues/1102)
 * [Comment of HaoChen](https://gitlab.com/gitlab-com/www-gitlab-com/issues/1108)
+
+Summary:
+
+- Automated testing of recovering [PostgreSQL database] backups
+- HA design, high available distribution system
+
+
 
 #### Last words
 
