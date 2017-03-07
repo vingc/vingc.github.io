@@ -84,7 +84,7 @@ Summary:
 
 #### Last words
 
-I was surprised and moved by the way GITLAB dealing with the incident, loyal to the truth and transparency. As a Chinese who has been deceived and duped for many years by Chinese government and Chinese media and Chinese companies, the transparency is a beam of clear light to my dark life.
+I was surprised and moved by the way GITLAB dealing with the incident, loyal to the truth and transparency. As a Chinese who has been deceived and duped for many years by Chinese government and Chinese media and Chinese companies, the transparency is a beam of clear light to my life.
 
 
 
