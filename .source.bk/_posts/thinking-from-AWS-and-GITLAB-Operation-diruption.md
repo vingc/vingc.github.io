@@ -62,6 +62,12 @@ List some examples.
 
 A button of Automation system to remove server or database is better than a command need be input. A button only needs to be clicked once by mouse, but a command usually needs to be input by typing tens of different keys on keyboard. Furthermore, we can make double-check by popping up a dialog when button is clicked, meanwhile popup can slow the actions of emergency operations, give operator more time and another chance to think and confirm, decrease the possibility of error. Speed is not our first objective, accuracy is. 
 
+See how GITHUB does:
+
+![DangeAction](../images/critical_popup.png)
+
+
+
 Looked at another way, Automation system can limit unexpected operations. For example, When operator is removing the database, the system checks the service firstly, when it finds out that there is business data being transited between the database and the business service system, the automation system can reject this operation which can disrupt the online service.
 
 _People always make mistakes, but machine not. Trust system, not operator._
