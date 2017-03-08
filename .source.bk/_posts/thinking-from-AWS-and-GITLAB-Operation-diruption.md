@@ -64,7 +64,7 @@ A button of Automation system to remove server or database is better than a comm
 
 See how GITHUB does:
 
-![DangeAction](../images/critical_popup.png)
+![DangeAction](/images/critical_popup.png)
 
 
 
