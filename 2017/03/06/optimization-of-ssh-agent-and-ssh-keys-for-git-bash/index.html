@@ -13,14 +13,14 @@ After starting a new “git bash” t">
 <meta property="og:site_name" content="Time Gap">
 <meta property="og:description" content="BackgroundSeveral days ago, To use github, i installed git in my new laptop for the first time, and encountered a problem about management of ssh-agent and ssh keys.
 After starting a new “git bash” t">
-<meta property="og:image" content="http://vingc.github.io/../images/ssh_error.png">
-<meta property="og:image" content="http://vingc.github.io/../images/dup_ssh_processes.png">
-<meta property="og:updated_time" content="2017-03-06T08:44:41.532Z">
+<meta property="og:image" content="http://vingc.github.io/images/ssh_error.png">
+<meta property="og:image" content="http://vingc.github.io/images/dup_ssh_processes.png">
+<meta property="og:updated_time" content="2017-03-08T07:02:15.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="optimization of ssh-agent and ssh-add for git bash">
 <meta name="twitter:description" content="BackgroundSeveral days ago, To use github, i installed git in my new laptop for the first time, and encountered a problem about management of ssh-agent and ssh keys.
 After starting a new “git bash” t">
-<meta name="twitter:image" content="http://vingc.github.io/../images/ssh_error.png">
+<meta name="twitter:image" content="http://vingc.github.io/images/ssh_error.png">
   
     <link rel="alternate" href="/atom.xml" title="Time Gap" type="application/atom+xml">
   
@@ -102,7 +102,7 @@ After starting a new “git bash” t">
         <hr>
 <h4 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h4><p>Several days ago, To use github, i installed git in my new laptop for the first time, and encountered a problem about management of ssh-agent and ssh keys.</p>
 <p>After starting a new “git bash” terminal, there was something wrong when pushed my new commit, see below picture:</p>
-<p><img src="../images/ssh_error.png" alt="error"></p>
+<p><img src="/images/ssh_error.png" alt="error"></p>
 <p>when used command “ssh-add -l” to check the private keys added, it returned an error, the key error message “Could not open a connection to your authentication agent” .</p>
 <h4 id="Resolution"><a href="#Resolution" class="headerlink" title="Resolution"></a>Resolution</h4><p>After google, realized that “git bash” needs us to start the “ssh-agent” process before “ssh-add” and “git” command using ssh protocol. </p>
 <p><a href="http://stackoverflow.com/questions/17846529/could-not-open-a-connection-to-your-authentication-agent/10077302#10077302" target="_blank" rel="external">resolution in StackOverFlow</a></p>
@@ -114,7 +114,7 @@ After starting a new “git bash” t">
 <p>Have we done?</p>
 <p>Ha, haven’t, it’s a good resolution, but not the best.</p>
 <p>I tested the resolution by opening several “git bash” terminals at the same time, see the picture:</p>
-<p><img src="../images/dup_ssh_processes.png" alt="multiple processes"></p>
+<p><img src="/images/dup_ssh_processes.png" alt="multiple processes"></p>
 <p>There would be multiple processes if we opened several “git bash” terminals, each process per time.</p>
 <p>This was not elegant. I couldn’t bear this resolution too. I wanted to optimize it.</p>
 <h4 id="Final"><a href="#Final" class="headerlink" title="Final"></a>Final</h4><p>New resolution:  check whether the ssh-agent has been started, it’s dependent on the result to execute commands or not.</p>

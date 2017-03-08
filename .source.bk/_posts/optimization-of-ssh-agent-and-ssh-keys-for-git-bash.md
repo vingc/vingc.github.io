@@ -17,7 +17,7 @@ Several days ago, To use github, i installed git in my new laptop for the first 
 
 After starting a new "git bash" terminal, there was something wrong when pushed my new commit, see below picture:
 
-![error](../images/ssh_error.png)
+![error](/images/ssh_error.png)
 
  
 
@@ -47,7 +47,7 @@ Ha, haven't, it's a good resolution, but not the best.
 
 I tested the resolution by opening several "git bash" terminals at the same time, see the picture:
 
-![multiple processes](../images/dup_ssh_processes.png)
+![multiple processes](/images/dup_ssh_processes.png)
 
 
 
