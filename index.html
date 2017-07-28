@@ -111,6 +111,8 @@
 </li>
 <li><p>基本类型，C++新增了“char16_t”和“char32_t”；C++提供了bool类型，C在C99标准里才新增bool类型，且需要使用头文件”stdbool.h”。</p>
 </li>
+<li><p>浮点常量，C++默认的浮点常量是double类型，除非通过后缀指定类型，如2.3f和1.2F为float类型，3.3和3E2为double类型，33.4l和33.4L为long double类型。</p>
+</li>
 <li><p>强制类型转换，C只支持一种格式“(TypeName)value”，C++除了支持C的这种方式之后，还支持其他转换方式，如“TypeName(value)”、“static_cast\<type>(value)”。</type></p>
 </li>
 <li><p>拼接字符串常量，C++支持该特性，如“cout&lt;&lt;”This is a test “ “and this is another test.”;”，“cout&lt;&lt;”This is a test and this is another test.””；前面两次输出内容是相等的，C++自动把空白分割的多个字符串常量拼接为一个，空白可以是空格、制表符、换行符；第二个字符串的首字符替代前一个字符串的空字符“\0”。</p>
@@ -149,7 +151,7 @@
 </li>
 <li><p>显示实例化（explicit instantiation），C++支持显示实例化，即让编译器直接生成特定类型的函数定义。如“template swap<int>(int a,int b);”，语义为“使用swap()模板生成int类型的函数定义”。显示实例化不需要另外定义函数实现，只需要给出声明。</int></p>
 </li>
-<li><p>显示具体化（explicit specialization），如“template&lt;&gt; swap<int>(int a, int b);”，或者“template&lt;&gt; swap(int a,int b);”，语义为“不要使用swap()模板来生成int类型的函数定义，而是使用专门为int类型显示的定义的函数定义”。具体化除了要给出函数声明，还需要专门提供具体的函数实现。具体化函数优先级高于模版函数，而非模板函数优先于具体化和模板函数。如果在同一个文件中同时声明了同一个模板的同一个类型的显示具体化函数和显示实例化函数，则会出错。</int></p>
+<li><p>显示具体化（explicit specialization），如“template&lt;&gt; swap<int>(int a, int b);”，或者“template&lt;&gt; swap(int a,int b);”，语义为“不要使用swap()模板来生成int类型的函数定义，而是使用专门为int类型显示的定义的函数定义”。具体化除了要给出函数声明，还需要专门提供具体的函数实现。具体化函数优先级高于模版函数，而非模板函数优先于具体化和模板函数。<del>如果在同一个文件中同时声明了同一个模板的同一个类型的显示具体化函数和显示实例化函数，则会出错。（测试发现，编译和运行并不会出错，使用该类型的实参调用函数时，调用了具体化函数。）</del></int></p>
 </li>
 <li><p>decltype关键字，C++11新增特性，在泛型函数中可能遇到无法确定变量类型的情况，如“T a, T b, ?type? x=a+b;”，但是可以用decltype声明“decltype(a+b) x;”，语义是，变量x的类型为a+b表达式的类型。一般声明格式为“decltype(expression) var;”，编译器依次应用如下规则，得出var的类型：</p>
 <ul>
@@ -180,7 +182,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vingc.github.io/2017/07/11/differences-between-C-and-C/" data-id="cj5nmpe9s0000ocjfgy2o33ry" class="article-share-link">Share</a>
+      <a data-url="http://vingc.github.io/2017/07/11/differences-between-C-and-C/" data-id="cj5o1u18u0001twjfonb78coa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/technology-C-C/">technology C C++</a></li></ul>
@@ -273,7 +275,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vingc.github.io/2017/04/02/my-hadoop-tutorial/" data-id="cj5nmpeaa0004ocjf114xkbc4" class="article-share-link">Share</a>
+      <a data-url="http://vingc.github.io/2017/04/02/my-hadoop-tutorial/" data-id="cj5o1u18q0000twjfy9okhoc5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/technology-Hadoop/">technology Hadoop</a></li></ul>
@@ -364,7 +366,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vingc.github.io/2017/03/07/thinking-from-AWS-and-GITLAB-Operation-diruption/" data-id="cj5nmpeaw000bocjflct81tk7" class="article-share-link">Share</a>
+      <a data-url="http://vingc.github.io/2017/03/07/thinking-from-AWS-and-GITLAB-Operation-diruption/" data-id="cj5o1u1920004twjf2xe92kfm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/operation/">operation</a></li></ul>
@@ -439,7 +441,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vingc.github.io/2017/03/06/optimization-of-ssh-agent-and-ssh-keys-for-git-bash/" data-id="cj5nmpea70003ocjfcbpwauls" class="article-share-link">Share</a>
+      <a data-url="http://vingc.github.io/2017/03/06/optimization-of-ssh-agent-and-ssh-keys-for-git-bash/" data-id="cj5o1u1900003twjf5g0hyqcv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git-bash-ssh-agent-ssh-add/">git-bash ssh-agent ssh-add</a></li></ul>
