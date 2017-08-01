@@ -17,7 +17,7 @@
 
 
 源文件命名的差异，C的源文件是“.c”结尾，头文件是“.h”结尾；C++的源文件是“.cpp”、”.cc“、”.cxx“等，而头文件没有扩展名，但支持C式头文件和转换后的C头文件，如”math.h“和”cmath“">
-<meta property="og:updated_time" content="2017-07-28T13:25:24.461Z">
+<meta property="og:updated_time" content="2017-08-01T03:53:36.181Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Differences between C and C++">
 <meta name="twitter:description" content="C和C++最大的区别显然是C++增加了OOP和泛型的特性，这一部分知识是相对完整和独立的，不在本文里涉及。本文的目的是记录C和C++在语法上的细微差异，作为以后查阅和复习的资料。
@@ -110,8 +110,6 @@
 </li>
 <li><p>main函数的差异，如果main要求返回int型时，C++可以在最后一行省略”return“语句，编译器默认为”return 0;“；C不允许省略。</p>
 </li>
-<li><p>命名空间，C++增加了命名空间的特性，”using namespace std;“ 或”std::cout“或”using std::cout;“；”using“语句放到源文件的头部，函数定义之前，对可以本文件的所有函数生效，如果放在函数定义的头部，只会对本函数生效。</p>
-</li>
 <li><p>输入和输出，C++使用”cout“和”cin“对象完成输出和输入操作。如”cout&lt;&lt;”Hello World”&lt;\<endl;“和”cin>&gt;var;“；“&lt;&lt;”插入运算符，“&gt;&gt;”提取运算符。</endl;“和”cin></p>
 </li>
 <li><p>命名规则，没有差异，以单下划线或双下划线开头的名字预留给编译器使用。</p>
@@ -139,6 +137,8 @@
 <li><p>内存分配，C使用malloc()函数，C++另外支持了new关键字，new可以为数据对象分配内存，如”Typename <em> pointer = new Typename;”、“int </em> pInt = new int;”；Typename可以使基本类型也可以是结构类型。</p>
 </li>
 <li><p>内存释放，C使用free()函数释放malloc()函数分配的内存，C++对于new分配的内存，需要使用delete释放，如“delete pointer;”，“delete pInt;”。</p>
+</li>
+<li><p>定位new运算符，new分配数组/结构/基本类型的时候可以同时初始化，如“int<em> a=new int(5); int</em> b=new int{10};”；定位new运算符使开发人员可以指定分配内存的buffer地址，如”char buffer[50]; int * t = new (buffer) int[5];“，编译器会把t[5]放到buffer上，t的开始地址即buffer的开始地址，buffer在语义是指示地址开始的位置。</p>
 </li>
 <li><p>动态数组，C++支持动态数组，即运行时确定数组长度和创建数组，如“Typename <em> pointer = new Typename[nums];”，“int </em> pIntArray = new int[10];”；释放使用“delete [] pointer;”语法。</p>
 </li>
@@ -177,15 +177,25 @@
 </li>
 </ul>
 </li>
-<li><p>​</p>
-</li>
 <li><p>后置返回类型，语法“auto fun( int a, int b ) -&gt;double {/<em>func body\</em>/}”，-&gt;double被称为后置返回类型，auto是占位符，用于表示后置返回类型提供的类型，在这里是double。这个特性通常结合模板和delctype使用，如</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">template &lt;typename T1, typename T2&gt;</div><div class="line"></div><div class="line">auto fun( T1 x, T2 y )-&gt;decltype(x+y) </div><div class="line"></div><div class="line">&#123;/*func body*/&#125;</div></pre></td></tr></table></figure>
 <p>decltype在参数声明后面，位于x和y的作用于内。</p>
 </li>
-<li><p>​</p>
+<li><p>全局变量，C和C++都支持使用extern关键字引用声明其他文件中定义的全局变量，如“extern int g_lab;”；C++还支持使用作用域解析运算符修饰全局变量，可以在不使用extern引用声明的情况下直接使用其他文件定义的全局变量，如“cout&lt;&lt;::g_lab&lt;&lt;endl; int a = ::g_lab;”。</p>
+</li>
+<li><p>auto和register，在C++11之前，auto指示修饰的变量为自动变量（即临时变量），register指示修饰的变量为寄存器变量；C++11发布后，auto用于自动类型推断，register只是指示修饰的变量为自动变量。</p>
+</li>
+<li><p>mutable关键字，C不支持，而C++支持的特性，主要是配合const使用，mutable可以修饰类的成员或者结构的成员，在使用const修饰类或者结构变量之后，mutable修饰的成员仍然可以被修改。</p>
+</li>
+<li><p>const关键字修饰全局变量，如”const int g_lab=10;“，C中const不影响全局变量的作用域，但在C++中，const修饰全局变量时，等同于static，该变量的作用域变成本文件；C++之所以支持该特性，是为了可以把常量定义放到头文件中，当多个源文件包含头文件时，对该常量的定义不违法唯一定义规则(ODR);”extern const“同时使用时，extern覆盖const的作用域特性，使该常量可以被其他源文件引用声明然后使用，但该常量同时具备const的常量特性，引用声明可以有多处，但定义只可以有一处（ODR）。</p>
+</li>
+<li><p>语言链接性，C++因为支持同名函数，因此编译器执行名称修饰，把同名不同参数列表的函数翻译成不同的名字，这和C语言编译器不同，所以在C++源文件中调用C编译的库文件里的函数时，要使用extern “C” 修饰函数原型声明，如” extern “C” void fun(int);“，该语义告诉编译器使用C语言的协议用于函数名字查询。相应的extern “C++”修饰函数原型声明时，告诉编译器使用C++语言的协议用于函数名字查询（这在C++源代码里是默认行为）。</p>
+</li>
+<li><p>namespace名称空间，除了C传统的全局声明区域和代码块声明区域之外，C++支持另外一种名称声明区域即名称空间。不同声明区域之间的名称可以相同，名称空间可以起到名称隔离的作用，给名称的使用提供更多选择。使用语法”namespace test { int a; struct bff{}; void fun(); void real(){} }“，可以使用作用域解析运算符::使用名称空间中的名称，如”std::cin&gt;&gt;test::a;“。也可以使用using 编译指令或者using声明，把名称空间中的全部名称或者某些名称导入当前声明区域，using编译指令”using namespace test;“，using声明”using test::a;“。名称空间可以嵌套，using指令也可以传递，如果把A导入B，则把B导入C的时候相当于同时A导入C。在代码块中使用using声明时，导入的名称可能与本地变量相同名称冲突；但使用using编译指令导入所有名称时，本地变量相同名称会覆盖名称空间的名称。未命名的名称空间使内部的名称相当于作用域为本文件的静态变量，如”namespace {int a=10;}“相当于定义了”static int a=10;“。名称空间可以定义别名，如namespace MFF = merge:file:first;</p>
 </li>
 <li><p>（未完待续）</p>
+</li>
+<li><p>​</p>
 <p>​</p>
 </li>
 </ol>
@@ -193,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vingc.github.io/2017/07/11/differences-between-C-and-C/" data-id="cj5o1u18u0001twjfonb78coa" class="article-share-link">Share</a>
+      <a data-url="http://vingc.github.io/2017/07/11/differences-between-C-and-C/" data-id="cj5t2f8cd0000i4jf6njrl3zf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/technology-C-C/">technology C C++</a></li></ul>
