@@ -65,6 +65,81 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Initialization-of-C++-objects" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/Initialization-of-C++-objects/" class="article-date">
+  <time datetime="2017-08-02T12:54:05.000Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/02/Initialization-of-C++-objects/">Initialization of C++ objects</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h4 id="类构造函数的形态"><a href="#类构造函数的形态" class="headerlink" title="类构造函数的形态"></a>类构造函数的形态</h4><p>以类Stock为例，构造函数原型有以下几种。</p>
+<ol>
+<li><p>implicit default constructor，如果类声明没有提供构造函数，编译器生成一个默认的隐式构造函数，原型如下</p>
+<p>Stock(){}; //do noting</p>
+</li>
+<li><p>explicit default constructor without parameters，程序员可以在类声明中显示定义无参数的默认构造函数，原型如下</p>
+<p>Stock(){ /*do whatever you need*/ };</p>
+</li>
+<li><p>explicit default constructor with parameters all have default values，程序员可以在类声明中显示定义有参数的默认构造函数，但所有的参数必须提供默认值，原型如下</p>
+<p>Stock( const char * name = “null”, int val = 10 );</p>
+</li>
+<li><p>explicit constructor with parameters，程序员可以在类声明中显示定义有参数的重载构造函数，原型如下</p>
+<p>Stock( const char * name, int val = 10 ); //参数的默认值都是可选的，但需要遵守默认值的赋值规则</p>
+</li>
+</ol>
+<h4 id="类对象的初始化"><a href="#类对象的初始化" class="headerlink" title="类对象的初始化"></a>类对象的初始化</h4><p>类对象的初始化方式跟构造函数的原型相关，因为在创建对象时，程序必然会调用构造函数用于创建对象，根据构造函数原型的不同，初始化方式有一下几种。</p>
+<ol>
+<li>Stock stGoogle; // use default constructor implicitly</li>
+<li>Stock stGoogle = Stock(); // use default constructor explicitly</li>
+<li>Stock * stGoogle = new Stock(); // use default constructor implicitly</li>
+<li>Stock stGoogle = Stock( “google”, 10 ); // use explicit constructor</li>
+<li>Stock stGoogle( “google”, 10 );  // use explicit constructor</li>
+<li>Stock * stGoogle = new Stock( “google”, 10 ); //use explicit constructor</li>
+</ol>
+<p>以下是C++11支持的列表初始化方式</p>
+<ol>
+<li>Stock stGoogle = Stock{ “google”, 10 }; // use explicit constructor  C++11</li>
+<li>Stock stGoogle{ “google”, 10 };  // use explicit constructor  C++11</li>
+<li>Stock * stGoogle = new Stock{ “google”, 10 }; //use explicit constructor   C++11</li>
+<li>Stock stGoogle{}; // use default constructor explicitly C++11</li>
+</ol>
+<h4 id="类对象数组的初始化"><a href="#类对象数组的初始化" class="headerlink" title="类对象数组的初始化"></a>类对象数组的初始化</h4><p>C++设计类特性的时候，尽力满足使用对象类型像使用基本类型一样方便的初衷，因此可以在C++的类管理里，看到对象初始化，对象指针等特点都像基本类型一样维护。而类对象数组也是同样的语法，使用默认构造函数的初始化如下 </p>
+<p>Stock array[10];</p>
+<p>也可以显示的使用带参数的构造函数初始化数组，如</p>
+<p>Stock array[10] = { Stock( “google”,1 ), Stock( “yahoo”, 2 ), Stock( “baidu”, 3 ) }; //大括号围起来的逗号分隔的值列表</p>
+<p>该次使用显示构造函数初始化数组的前三个成员，剩余的成员仍然使用默认构造函数。编译器处理这种对象数组初始化方式的流程是，首先使用默认构造函数创建数组元素，然后花括号中的构造函数将创建临时对象，然后将临时对象的内容复制到相应的元素中。因此 ，要创建类对象数组，则这个类必须有默认构造函数。因此实践中，我们可以先使用默认构造函数创建数组，然后在后续的流程里根据需要创建对象并赋值给数组成员，这也是主流的基本类型数组的使用方式。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vingc.github.io/2017/08/02/Initialization-of-C++-objects/" data-id="cj5ul6znw0000ogjfuz4wz5cn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/technology-C/">technology C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-differences-between-C-and-C" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/07/11/differences-between-C-and-C/" class="article-date">
@@ -139,7 +214,7 @@
 </li>
 <li><p>函数原型，当函数定义在使用之前时，C和C++的函数原型声明都是可选的；当函数定义在使用之后时，某些C的函数原型声明是可选的（返回值是int时不需要函数原型声明，但是不建议这么使用，因为编译器无法检查参数列表），C++的函数原型声明是必须的。C++的函数原型省略参数列表时，如“int fun()”，表示参数类型为“void”；而C的函数原型省略参数列表时，表示未定义。无论是C或C++声明函数原型时，形参变量名是可选的，如“int fun( int, int b )”，而且此处的变量名可以与定义处的变量名不同。（私以为，这么灵活的设计反而使初学者难以记忆，感到混淆；工程里不用考虑这么多，所有定义的函数都需要声明原型，这样可以保证兼容性和可移植性。）</p>
 </li>
-<li><p>左值引用&amp;右值引用，C++增加了这两个语法特性；左值引用是定义一个变量的别名，如“int a=10; int &amp; b = a;”，在使用中b和a一样，b的地址等于a的地址；引用必须在定义时初始化，而且定义后不能改变引用指向的变量地址。函数形参声明为左值引用，这种参数传递方式称为按引用传递；可以在被调用函数中像调用函数中一样修改变量的值（类似于指针参数的功能）。如果引用参数是const，编译器在两种情况下可能会生成临时变量存储实参的值，case1 实参的类型正确但不是左值，case2 实参的类型不正确但可以转换为正确的类型。左值一般之赋值等号的左边，可以用地址引用的值，非左值包括字面常量（不包括字符串常量）和多项表达式。右值引用的声明如“int &amp;&amp; b = sqrt(36.0);”；左值引用的别名不占用额外的存储空间。（强调函数引用参数是const时，编译器才会生成临时变量的原因是，引用参数主要是为了提供被调用函数修改调用函数变量值的一种形式，并在传递参数时避免大块内存的copy，而临时变量的生成，会阻止该过程；当引用参数声明为const时，明确说明对引用参数的修改不能影响被调用函数内变量，因此可以使用生成临时变量的形式。）</p>
+<li><p>左值引用&amp;右值引用，C++增加了这两个语法特性；左值引用是定义一个变量的别名，如“int a=10; int &amp; b = a;”，在使用中b和a一样，b的地址等于a的地址；引用必须在定义时初始化，而且定义后不能改变引用指向的变量地址。函数形参声明为左值引用，这种参数传递方式称为按引用传递；可以在被调用函数中像调用函数中一样修改变量的值（类似于指针参数的功能）。如果引用参数是const，编译器在两种情况下可能会生成临时变量存储实参的值，case1 实参的类型正确但不是左值，case2 实参的类型不正确但可以转换为正确的类型。左值一般指赋值等号的左边，可以用地址引用的值，非左值包括字面常量（不包括字符串常量）和多项表达式。右值引用的声明如“int &amp;&amp; b = sqrt(36.0);”；左值引用的别名不占用额外的存储空间。（强调函数引用参数是const时，编译器才会生成临时变量的原因是，引用参数主要是为了提供被调用函数修改调用函数变量值的一种形式，并在传递参数时避免大块内存的copy，而临时变量的生成，会阻止该过程；当引用参数声明为const时，明确说明对引用参数的修改不能影响被调用函数内变量，因此可以使用生成临时变量的形式。）</p>
 </li>
 <li><p>函数的默认参数，C++支持声明函数的默认参数，比如声明函数“int f( int a = 1 );”，在调用f()时因为未给出实参，因此编译器采用默认值1；对于带参数列表的函数，必须从右到左的一次添加默认值，即如果给某个参数设置默认值，则它右边的所有参数都需要设置默认值；调用函数时，从左到右依次给出实参，不能跳过某个参数，如此调用是不允许的“fun( 1, ,2 );”。</p>
 </li>
@@ -192,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vingc.github.io/2017/07/11/differences-between-C-and-C/" data-id="cj5t2f8cd0000i4jf6njrl3zf" class="article-share-link">Share</a>
+      <a data-url="http://vingc.github.io/2017/07/11/differences-between-C-and-C/" data-id="cj5ul6zo10001ogjf8vqb06av" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/technology-C-C/">technology C C++</a></li></ul>
@@ -285,7 +360,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vingc.github.io/2017/04/02/my-hadoop-tutorial/" data-id="cj5t2f8cy0008i4jfbc8noc4o" class="article-share-link">Share</a>
+      <a data-url="http://vingc.github.io/2017/04/02/my-hadoop-tutorial/" data-id="cj5ul6zo70004ogjfc0o9dcdi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/technology-Hadoop/">technology Hadoop</a></li></ul>
@@ -376,7 +451,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vingc.github.io/2017/03/07/thinking-from-AWS-and-GITLAB-Operation-diruption/" data-id="cj5t2f8dd000bi4jfvatfu35d" class="article-share-link">Share</a>
+      <a data-url="http://vingc.github.io/2017/03/07/thinking-from-AWS-and-GITLAB-Operation-diruption/" data-id="cj5ul6zoc0006ogjfl3rr62r8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/operation/">operation</a></li></ul>
@@ -451,7 +526,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vingc.github.io/2017/03/06/optimization-of-ssh-agent-and-ssh-keys-for-git-bash/" data-id="cj5t2f8cg0001i4jfcquctwah" class="article-share-link">Share</a>
+      <a data-url="http://vingc.github.io/2017/03/06/optimization-of-ssh-agent-and-ssh-keys-for-git-bash/" data-id="cj5ul6zo60003ogjfd87pr45w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git-bash-ssh-agent-ssh-add/">git-bash ssh-agent ssh-add</a></li></ul>
@@ -482,7 +557,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-bash-ssh-agent-ssh-add/">git-bash ssh-agent ssh-add</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operation/">operation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/technology-C-C/">technology C C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/technology-Hadoop/">technology Hadoop</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-bash-ssh-agent-ssh-add/">git-bash ssh-agent ssh-add</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operation/">operation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/technology-C-C/">technology C C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/technology-C/">technology C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/technology-Hadoop/">technology Hadoop</a></li></ul>
     </div>
   </div>
 
@@ -492,7 +567,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/git-bash-ssh-agent-ssh-add/" style="font-size: 10px;">git-bash ssh-agent ssh-add</a> <a href="/tags/operation/" style="font-size: 10px;">operation</a> <a href="/tags/technology-C-C/" style="font-size: 10px;">technology C C++</a> <a href="/tags/technology-Hadoop/" style="font-size: 10px;">technology Hadoop</a>
+      <a href="/tags/git-bash-ssh-agent-ssh-add/" style="font-size: 10px;">git-bash ssh-agent ssh-add</a> <a href="/tags/operation/" style="font-size: 10px;">operation</a> <a href="/tags/technology-C-C/" style="font-size: 10px;">technology C C++</a> <a href="/tags/technology-C/" style="font-size: 10px;">technology C++</a> <a href="/tags/technology-Hadoop/" style="font-size: 10px;">technology Hadoop</a>
     </div>
   </div>
 
@@ -501,7 +576,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
     </div>
   </div>
 
@@ -512,6 +587,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/08/02/Initialization-of-C++-objects/">Initialization of C++ objects</a>
+          </li>
         
           <li>
             <a href="/2017/07/11/differences-between-C-and-C/">Differences between C and C++</a>

@@ -3,33 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>My Hadoop Stage Plan | Time Gap</title>
+  <title>Initialization of C++ objects | Time Gap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Beginner
-Install a VM of Ubuntu on PC, then install Hadoop in Ubuntu.
+  <meta name="description" content="类构造函数的形态以类Stock为例，构造函数原型有以下几种。
 
-http://hadoop.apache.org/docs/r1.0.4/cn/quickstart.html
+implicit default constructor，如果类声明没有提供构造函数，编译器生成一个默认的隐式构造函数，原型如下
+Stock(){}; //do noting
 
-http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/">
+explicit default constructor without parameters，程序员可以在类声明中显示定义无参数的默认构造函数，原型如下">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My Hadoop Stage Plan">
-<meta property="og:url" content="http://vingc.github.io/2017/04/02/my-hadoop-tutorial/index.html">
+<meta property="og:title" content="Initialization of C++ objects">
+<meta property="og:url" content="http://vingc.github.io/2017/08/02/Initialization-of-C++-objects/index.html">
 <meta property="og:site_name" content="Time Gap">
-<meta property="og:description" content="Beginner
-Install a VM of Ubuntu on PC, then install Hadoop in Ubuntu.
+<meta property="og:description" content="类构造函数的形态以类Stock为例，构造函数原型有以下几种。
 
-http://hadoop.apache.org/docs/r1.0.4/cn/quickstart.html
+implicit default constructor，如果类声明没有提供构造函数，编译器生成一个默认的隐式构造函数，原型如下
+Stock(){}; //do noting
 
-http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/">
-<meta property="og:updated_time" content="2017-04-02T07:18:37.447Z">
+explicit default constructor without parameters，程序员可以在类声明中显示定义无参数的默认构造函数，原型如下">
+<meta property="og:updated_time" content="2017-08-02T05:43:23.915Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="My Hadoop Stage Plan">
-<meta name="twitter:description" content="Beginner
-Install a VM of Ubuntu on PC, then install Hadoop in Ubuntu.
+<meta name="twitter:title" content="Initialization of C++ objects">
+<meta name="twitter:description" content="类构造函数的形态以类Stock为例，构造函数原型有以下几种。
 
-http://hadoop.apache.org/docs/r1.0.4/cn/quickstart.html
+implicit default constructor，如果类声明没有提供构造函数，编译器生成一个默认的隐式构造函数，原型如下
+Stock(){}; //do noting
 
-http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/">
+explicit default constructor without parameters，程序员可以在类声明中显示定义无参数的默认构造函数，原型如下">
   
     <link rel="alternate" href="/atom.xml" title="Time Gap" type="application/atom+xml">
   
@@ -82,10 +82,10 @@ http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/">
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-my-hadoop-tutorial" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Initialization-of-C++-objects" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/02/my-hadoop-tutorial/" class="article-date">
-  <time datetime="2017-04-02T13:22:05.000Z" itemprop="datePublished">2017-04-02</time>
+    <a href="/2017/08/02/Initialization-of-C++-objects/" class="article-date">
+  <time datetime="2017-08-02T12:54:05.000Z" itemprop="datePublished">2017-08-02</time>
 </a>
     
   </div>
@@ -96,7 +96,7 @@ http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/">
         
   
     <h1 class="article-title" itemprop="name">
-      My Hadoop Stage Plan
+      Initialization of C++ objects
     </h1>
   
 
@@ -105,68 +105,50 @@ http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/">
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h4 id="Beginner"><a href="#Beginner" class="headerlink" title="Beginner"></a>Beginner</h4><ol>
-<li><p>Install a VM of Ubuntu on PC, then install Hadoop in Ubuntu.</p>
-<ul>
-<li><p><a href="http://hadoop.apache.org/docs/r1.0.4/cn/quickstart.html" target="_blank" rel="external">http://hadoop.apache.org/docs/r1.0.4/cn/quickstart.html</a></p>
+<h4 id="类构造函数的形态"><a href="#类构造函数的形态" class="headerlink" title="类构造函数的形态"></a>类构造函数的形态</h4><p>以类Stock为例，构造函数原型有以下几种。</p>
+<ol>
+<li><p>implicit default constructor，如果类声明没有提供构造函数，编译器生成一个默认的隐式构造函数，原型如下</p>
+<p>Stock(){}; //do noting</p>
 </li>
-<li><p><a href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html" target="_blank" rel="external">http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html</a></p>
+<li><p>explicit default constructor without parameters，程序员可以在类声明中显示定义无参数的默认构造函数，原型如下</p>
+<p>Stock(){ /*do whatever you need*/ };</p>
 </li>
-<li><p><a href="https://www.cloudera.com/developers/get-started-with-hadoop-tutorial.html" target="_blank" rel="external">https://www.cloudera.com/developers/get-started-with-hadoop-tutorial.html</a></p>
-<p>​</p>
+<li><p>explicit default constructor with parameters all have default values，程序员可以在类声明中显示定义有参数的默认构造函数，但所有的参数必须提供默认值，原型如下</p>
+<p>Stock( const char * name = “null”, int val = 10 );</p>
 </li>
-</ul>
-</li>
-<li><p>understand Map Reduce, and practice some “Hello World” cases, e.g. Word Count1, Word Count2, Weather Data.</p>
-<ul>
-<li><p><a href="http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html" target="_blank" rel="external">http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html</a></p>
-</li>
-<li><p><a href="http://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html" target="_blank" rel="external">http://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html</a></p>
-<p>​</p>
-</li>
-</ul>
-</li>
-<li><p>understand the HDFS</p>
-<ul>
-<li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_design.html" target="_blank" rel="external">http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_design.html</a></li>
-<li><a href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html" target="_blank" rel="external">http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html</a></li>
-<li><a href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html" target="_blank" rel="external">http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html</a></li>
-</ul>
-<p>​</p>
+<li><p>explicit constructor with parameters，程序员可以在类声明中显示定义有参数的重载构造函数，原型如下</p>
+<p>Stock( const char * name, int val = 10 ); //参数的默认值都是可选的，但需要遵守默认值的赋值规则</p>
 </li>
 </ol>
-<h4 id="Junior"><a href="#Junior" class="headerlink" title="Junior"></a>Junior</h4><ol>
-<li><p>read book </p>
-<ul>
-<li>Hadoop.The.Definitive.Guide.4th.Edition</li>
-<li>Hadoop 技术内幕, HDFS &amp; Map Reduce</li>
-</ul>
-<p>​</p>
-</li>
+<h4 id="类对象的初始化"><a href="#类对象的初始化" class="headerlink" title="类对象的初始化"></a>类对象的初始化</h4><p>类对象的初始化方式跟构造函数的原型相关，因为在创建对象时，程序必然会调用构造函数用于创建对象，根据构造函数原型的不同，初始化方式有一下几种。</p>
+<ol>
+<li>Stock stGoogle; // use default constructor implicitly</li>
+<li>Stock stGoogle = Stock(); // use default constructor explicitly</li>
+<li>Stock * stGoogle = new Stock(); // use default constructor implicitly</li>
+<li>Stock stGoogle = Stock( “google”, 10 ); // use explicit constructor</li>
+<li>Stock stGoogle( “google”, 10 );  // use explicit constructor</li>
+<li>Stock * stGoogle = new Stock( “google”, 10 ); //use explicit constructor</li>
 </ol>
-<h4 id="Senior"><a href="#Senior" class="headerlink" title="Senior"></a>Senior</h4><ol>
-<li><p>Spark </p>
-<ul>
-<li><a href="https://spark.apache.org/docs/latest/" target="_blank" rel="external">https://spark.apache.org/docs/latest/</a></li>
-<li><a href="https://aiyanbo.gitbooks.io/spark-programming-guide-zh-cn/content/" target="_blank" rel="external">https://aiyanbo.gitbooks.io/spark-programming-guide-zh-cn/content/</a></li>
-</ul>
-<p>​</p>
-</li>
-<li><p>Data Mining</p>
-<ul>
-<li><a href="https://dataminingguide.books.yourtion.com/" target="_blank" rel="external">https://dataminingguide.books.yourtion.com/</a></li>
-<li><a href="https://github.com/linyiqun/DataMiningAlgorithm" target="_blank" rel="external">https://github.com/linyiqun/DataMiningAlgorithm</a></li>
-</ul>
-</li>
+<p>以下是C++11支持的列表初始化方式</p>
+<ol>
+<li>Stock stGoogle = Stock{ “google”, 10 }; // use explicit constructor  C++11</li>
+<li>Stock stGoogle{ “google”, 10 };  // use explicit constructor  C++11</li>
+<li>Stock * stGoogle = new Stock{ “google”, 10 }; //use explicit constructor   C++11</li>
+<li>Stock stGoogle{}; // use default constructor explicitly C++11</li>
 </ol>
+<h4 id="类对象数组的初始化"><a href="#类对象数组的初始化" class="headerlink" title="类对象数组的初始化"></a>类对象数组的初始化</h4><p>C++设计类特性的时候，尽力满足使用对象类型像使用基本类型一样方便的初衷，因此可以在C++的类管理里，看到对象初始化，对象指针等特点都像基本类型一样维护。而类对象数组也是同样的语法，使用默认构造函数的初始化如下 </p>
+<p>Stock array[10];</p>
+<p>也可以显示的使用带参数的构造函数初始化数组，如</p>
+<p>Stock array[10] = { Stock( “google”,1 ), Stock( “yahoo”, 2 ), Stock( “baidu”, 3 ) }; //大括号围起来的逗号分隔的值列表</p>
+<p>该次使用显示构造函数初始化数组的前三个成员，剩余的成员仍然使用默认构造函数。编译器处理这种对象数组初始化方式的流程是，首先使用默认构造函数创建数组元素，然后花括号中的构造函数将创建临时对象，然后将临时对象的内容复制到相应的元素中。因此 ，要创建类对象数组，则这个类必须有默认构造函数。因此实践中，我们可以先使用默认构造函数创建数组，然后在后续的流程里根据需要创建对象并赋值给数组成员，这也是主流的基本类型数组的使用方式。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vingc.github.io/2017/04/02/my-hadoop-tutorial/" data-id="cj5ul6zo70004ogjfc0o9dcdi" class="article-share-link">Share</a>
+      <a data-url="http://vingc.github.io/2017/08/02/Initialization-of-C++-objects/" data-id="cj5ul6znw0000ogjfuz4wz5cn" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/technology-Hadoop/">technology Hadoop</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/technology-C/">technology C++</a></li></ul>
 
     </footer>
   </div>
@@ -174,19 +156,10 @@ http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/">
     
 <nav id="article-nav">
   
-    <a href="/2017/07/11/differences-between-C-and-C/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Differences between C and C++
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/07/thinking-from-AWS-and-GITLAB-Operation-diruption/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/07/11/differences-between-C-and-C/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">thinking from AWS and GITLAB operation incident</div>
+      <div class="article-nav-title">Differences between C and C++</div>
     </a>
   
 </nav>
